@@ -16,11 +16,19 @@ body {
   background-size: 100%;
   width: 100%;
   height: 100vh;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+body.dark-mode {
+  background-color: hsl(235, 21%, 11%);
 }
 
 #heading {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 0;
   margin-bottom: 10px;
 }
@@ -40,9 +48,11 @@ button {
   background: none;
   border: none;
   cursor: pointer;
+
+  color: black;
 }
 
-.input-container {
+#input-field {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,10 +61,35 @@ button {
   border-radius: 5px;
   background-color: hsl(0, 0%, 100%);
   margin-bottom: 15px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+#enter-item {
+  border-radius: 5px;
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(235, 19%, 35%);
+  font-size: 18px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+#input-field.dark-mode {
+  background-color: hsl(235, 24%, 19%);
+  color: hsl(233, 14%, 35%);
+}
+
+#enter-item.dark-mode {
+  border-radius: 5px;
+  background-color: hsl(235, 24%, 19%);
+  color: hsl(234, 39%, 85%);
 }
 
 #add-todo {
-  width: 20px;
+  cursor: pointer;
+  width: 22px;
   height: 20px;
   border-radius: 50%;
   padding: 4px;
@@ -91,11 +126,25 @@ input::placeholder {
   color: hsl(235, 19%, 35%);
   background-color: hsl(0, 0%, 100%);
   border-bottom: 1px solid hsl(233, 11%, 84%);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
-.item span {
-  text-decoration: line-through;
-  color: hsl(233, 11%, 84%);
+.item.dark-mode {
+  background-color: hsl(235, 24%, 19%);
+  color: hsl(233, 14%, 35%);
+  border-bottom: 1px solid hsl(237, 14%, 26%);
+}
+
+.item-text {
+  /* text-decoration: line-through; */
+  color: hsl(235, 19%, 35%);
+}
+
+.item-text.dark-mode {
+  color: hsl(234, 39%, 85%);
+  transition: color 0.3s;
 }
 
 .remove-icon {
@@ -109,7 +158,14 @@ input::placeholder {
   border-radius: 50%;
   padding: 4px;
   border: 1px solid hsl(233, 11%, 84%);
-  background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  align-items: center;
+  display: flex;
+  /* background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%)); */
+}
+
+.check-icon img {
+  width: 10px;
+  display: none;
 }
 
 #items-left-container {
@@ -122,6 +178,19 @@ input::placeholder {
   background-color: hsl(0, 0%, 100%);
   box-shadow: 0px 25px 50px -15px hsl(233, 11%, 84%);
   margin-bottom: 15px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+#items-left-container.dark-mode {
+  background-color: hsl(235, 24%, 19%);
+  color: hsl(233, 14%, 35%);
+}
+
+#items-left-container.dark-mode button,
+#items-left-container-desktop.dark-mode button {
+  color: hsl(233, 14%, 35%);
 }
 
 #items-left-container-desktop {
@@ -141,11 +210,25 @@ input::placeholder {
   background-color: hsl(0, 0%, 100%);
   box-shadow: 0px 35px 50px -15px hsl(233, 11%, 84%);
   margin-bottom: 15px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.filters.dark-mode {
+  background-color: hsl(235, 24%, 19%);
+  color: hsl(233, 14%, 35%);
+}
+
+.filters.dark-mode button,
+.filters-desktop.dark-mode button {
+  color: hsl(233, 14%, 35%);
 }
 
 .filters button {
   font-weight: 700;
   color: hsl(236, 9%, 61%);
+  transition: color 0.3s;
 }
 
 .drag-instruction {
@@ -153,20 +236,20 @@ input::placeholder {
   color: hsl(236, 9%, 61%);
   padding: 20px;
   margin-top: 50px;
+  transition: color 0.3s;
 }
 
-@media (min-width: 376px) {
+@media (min-width: 800px) {
   * {
     font-size: 18px;
   }
 
   #heading {
-    padding: 5px 0;
+    padding: 5px 0 60px 0;
   }
 
   h1 {
     font-size: 30px;
-    padding-bottom: 55px;
   }
 
   body {
@@ -194,6 +277,14 @@ input::placeholder {
     background-color: hsl(0, 0%, 100%);
     box-shadow: 0px 35px 50px -15px hsl(233, 11%, 84%);
     margin-bottom: 15px;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+
+  #items-left-container-desktop.dark-mode {
+    background-color: hsl(235, 24%, 19%);
+    color: hsl(233, 14%, 35%);
   }
 
   .filters {
@@ -207,5 +298,13 @@ input::placeholder {
     padding: 20px;
     border-radius: 5px;
     background-color: hsl(0, 0%, 100%);
+    transition:
+      background-color 0.3s,
+      color 0.3s;
   }
+}
+
+.filters-desktop.dark-mode {
+  background-color: hsl(235, 24%, 19%);
+  color: hsl(233, 14%, 35%);
 }
