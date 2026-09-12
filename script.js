@@ -23,6 +23,7 @@ const enableDarkMode = () => {
     itemText.classList.add("dark-mode");
     filters.classList.add("dark-mode");
     filtersDesktop.classList.add("dark-mode");
+    body.style.backgroundImage = "url('./images/bg-desktop-dark.jpg')";
   } else {
     toggleMode.querySelector("img").src = "./images/icon-moon.svg";
     body.classList.remove("dark-mode");
@@ -34,6 +35,7 @@ const enableDarkMode = () => {
     itemText.classList.remove("dark-mode");
     filters.classList.remove("dark-mode");
     filtersDesktop.classList.remove("dark-mode");
+    body.style.backgroundImage = "url('./images/bg-desktop-light.jpg')";
   }
 };
 
