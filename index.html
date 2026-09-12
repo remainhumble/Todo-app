@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Todo app</title>
+  </head>
+  <body>
+    <div id="heading">
+      <h1>Todo</h1>
+      <img src="./images/icon-moon.svg" alt="" />
+    </div>
+
+    <div class="input-container">
+      <div id="add-todo"></div>
+      <input type="text" placeholder="Create a new todo..." />
+    </div>
+
+    <div id="items">
+      <!-- Add dynamic list items here -->
+      <div class="item">
+        <div class="item-content">
+          <img
+            class="check-icon"
+            src="./images/icon-check.svg"
+            alt="check-item"
+          />
+          <span>Read for 30 minutes </span>
+        </div>
+        <img
+          class="remove-icon"
+          src="./images/icon-cross.svg"
+          alt="remove-item"
+        />
+      </div>
+      <div id="items-left-container">
+        <!-- Add dynamic number -->
+
+        <p class="items-left">0 items left</p>
+        <button class="clear-completed">Clear Completed</button>
+      </div>
+      <div id="items-left-container-desktop">
+        <!-- Add dynamic number -->
+
+        <p class="items-left">0 items left</p>
+        <div class="filters-desktop">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="active">Active</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+        <button class="clear-completed">Clear Completed</button>
+      </div>
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="active">Active</button>
+      <button class="filter-btn" data-filter="completed">Completed</button>
+    </div>
+
+    <p class="drag-instruction">Drag and drop to reorder list</p>
+  </body>
+</html>
