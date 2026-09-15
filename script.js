@@ -2,14 +2,17 @@ const toggleMode = document.getElementById("toggleBtn");
 const body = document.body;
 const inputField = document.getElementById("input-field");
 const enterItem = document.getElementById("enter-item");
+const addTodo = document.getElementById("add-todo");
 const itemsLeftContainer = document.getElementById("items-left-container");
 const itemsLeftContainerDesktop = document.getElementById(
   "items-left-container-desktop",
 );
+const items = document.getElementById("items");
 const item = document.querySelector(".item");
 const itemText = document.querySelector(".item-text");
 const filters = document.querySelector(".filters");
 const filtersDesktop = document.querySelector(".filters-desktop");
+const taskData = [];
 
 const enableDarkMode = () => {
   if (toggleMode.querySelector("img").src.includes("icon-moon.svg")) {
@@ -41,4 +44,19 @@ const enableDarkMode = () => {
 
 toggleMode.addEventListener("click", () => {
   enableDarkMode();
+});
+
+const validateInput = (input) => {
+  input = input.trim();
+
+  if (!input) {
+    return;
+  }
+
+  input = input.charAt(0).toUpperCase() + input.slice(1);
+  console.log(input);
+};
+
+addTodo.addEventListener("click", () => {
+  validateInput(enterItem.value);
 });
