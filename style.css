@@ -84,7 +84,7 @@ body.dark-mode .filters-desktop button:hover {
   transition:
     background-color 0.3s,
     color 0.3s;
-    line-height: 20px;
+  line-height: 20px;
 }
 
 #input-field.dark-mode {
@@ -107,6 +107,10 @@ body.dark-mode .filters-desktop button:hover {
   border: 1px solid hsl(233, 11%, 84%);
 }
 
+body.dark-mode #add-todo {
+  border: 1px solid hsl(237, 14%, 26%);
+}
+
 .item-content {
   width: 100%;
   display: flex;
@@ -125,8 +129,13 @@ input::placeholder {
 }
 
 #items {
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   overflow: hidden;
+  background-color: hsl(0, 0%, 100%);
+}
+
+body.dark-mode #items {
+  background-color: hsl(235, 24%, 19%);
 }
 
 .item {
@@ -143,7 +152,7 @@ input::placeholder {
     color 0.3s;
 }
 
-.item.dark-mode {
+body.dark-mode .item {
   background-color: hsl(235, 24%, 19%);
   color: hsl(233, 14%, 35%);
   border-bottom: 1px solid hsl(237, 14%, 26%);
@@ -154,7 +163,7 @@ input::placeholder {
   color: hsl(235, 19%, 35%);
 }
 
-.item-text.dark-mode {
+body.dark-mode .item-text {
   color: hsl(234, 39%, 85%);
   transition: color 0.3s;
 }
@@ -178,6 +187,10 @@ input::placeholder {
 .check-icon img {
   width: 10px;
   display: none;
+}
+
+body.dark-mode .check-icon {
+  border: 1px solid hsl(237, 14%, 26%);
 }
 
 #items-left-container {
@@ -228,14 +241,19 @@ input::placeholder {
     color 0.3s;
 }
 
-.filters.dark-mode {
+body.dark-mode .filters {
   background-color: hsl(235, 24%, 19%);
   color: hsl(233, 14%, 35%);
   box-shadow: 0px 5px 5px -15px hsl(237, 14%, 26%);
 }
 
-.filters.dark-mode button,
-.filters-desktop.dark-mode button {
+body.dark-mode .filters-desktop {
+  background-color: hsl(235, 24%, 19%);
+  color: hsl(233, 14%, 35%);
+}
+
+body.dark-mode .filters button,
+body.dark-mode .filters-desktop button {
   color: hsl(233, 14%, 35%);
 }
 
@@ -294,7 +312,7 @@ input::placeholder {
     color: hsl(236, 9%, 61%);
     border-radius: 0 0 5px 5px;
     background-color: hsl(0, 0%, 100%);
-    box-shadow: 0px 35px 50px -15px hsl(233, 11%, 84%);
+    box-shadow: 0px 25px 150px -15px hsl(233, 11%, 84%);
     margin-bottom: 15px;
     transition:
       background-color 0.3s,
@@ -322,9 +340,4 @@ input::placeholder {
       background-color 0.3s,
       color 0.3s;
   }
-}
-
-.filters-desktop.dark-mode {
-  background-color: hsl(235, 24%, 19%);
-  color: hsl(233, 14%, 35%);
 }
