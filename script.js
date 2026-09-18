@@ -83,3 +83,11 @@ const validateInput = (input) => {
 addTodo.addEventListener("click", () => {
   validateInput(enterItem.value);
 });
+
+items.addEventListener("click", (event) => {
+  const checkItem = event.target.closest(".check-icon");
+
+  if (checkItem) {
+    checkItem.closest(".item").classList.toggle("completed");
+  }
+});

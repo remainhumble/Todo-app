@@ -99,16 +99,45 @@ body.dark-mode .filters-desktop button:hover {
 }
 
 #add-todo {
+  --border-background: hsl(233, 11%, 84%);
+  position: relative;
   cursor: pointer;
   width: 22px;
   height: 20px;
   border-radius: 50%;
   padding: 4px;
-  border: 1px solid hsl(233, 11%, 84%);
+}
+
+#add-todo::before,
+.check-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: var(--border-background);
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
 }
 
 body.dark-mode #add-todo {
-  border: 1px solid hsl(237, 14%, 26%);
+  --border-background: hsl(237, 14%, 26%);
+}
+
+#add-todo:hover,
+body.dark-mode #add-todo:hover {
+  --border-background: linear-gradient(
+    135deg,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
 }
 
 .item-content {
@@ -173,24 +202,53 @@ body.dark-mode .item-text {
 }
 
 .check-icon {
+  --border-background: hsl(233, 11%, 84%);
+  position: relative;
   cursor: pointer;
   width: 20px;
   height: 20px;
   border-radius: 50%;
   padding: 4px;
-  border: 1px solid hsl(233, 11%, 84%);
   align-items: center;
+  justify-content: center;
   display: flex;
-  /* background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%)); */
 }
 
 .check-icon img {
+  position: relative;
+  z-index: 1;
   width: 10px;
   display: none;
 }
 
+.item.completed .check-icon {
+  background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+
+.item.completed .check-icon::before {
+  background: transparent;
+}
+
+.item.completed .check-icon img {
+  display: block;
+}
+
+.item.completed .item-text {
+  color: hsl(236, 9%, 61%);
+  text-decoration: line-through;
+}
+
 body.dark-mode .check-icon {
-  border: 1px solid hsl(237, 14%, 26%);
+  --border-background: hsl(237, 14%, 26%);
+}
+
+.check-icon:hover,
+body.dark-mode .check-icon:hover {
+  --border-background: linear-gradient(
+    180deg,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
 }
 
 #items-left-container {
