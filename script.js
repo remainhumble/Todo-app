@@ -3,11 +3,12 @@ const body = document.body;
 const inputField = document.getElementById("input-field");
 const enterItem = document.getElementById("enter-item");
 const addTodo = document.getElementById("add-todo");
+const itemsLeft = document.getElementById("items-left");
 const itemsLeftContainer = document.getElementById("items-left-container");
 const itemsLeftContainerDesktop = document.getElementById(
   "items-left-container-desktop",
 );
-const items = document.getElementById("items");
+const todos = document.getElementById("todos");
 const filters = document.querySelector(".filters");
 const filtersDesktop = document.querySelector(".filters-desktop");
 const taskData = [];
@@ -52,42 +53,51 @@ const validateInput = (input) => {
 
   // Capitalize first letter
   input = input.charAt(0).toUpperCase() + input.slice(1);
-  console.log(`<div class="item">
-        <div class="item-content">
+  console.log(`<div class="todo">
+        <div class="content">
           <div class="check-icon" tabindex="0">
-            <img src="./images/icon-check.svg" alt="check-item" />
+            <img src="./images/icon-check.svg" alt="check-todo" />
           </div>
           <span class="item-text">${input}</span>
         </div>
         <img tabindex="0"
           class="remove-icon"
           src="./images/icon-cross.svg"
-          alt="remove-item"
+          alt="remove-todo"
         />
       </div>`);
-  items.innerHTML += `<div class="item">
-        <div class="item-content">
+todos.innerHTML += `<div class="todo">
+        <div class="content">
           <div class="check-icon" tabindex="0">
-            <img src="./images/icon-check.svg" alt="check-item" />
+            <img src="./images/icon-check.svg" alt="check-todo" />
           </div>
           <span class="item-text">${input}</span>
         </div>
         <img tabindex="0"
           class="remove-icon"
           src="./images/icon-cross.svg"
-          alt="remove-item"
+          alt="remove-todo"
         />
       </div>`;
 };
 
+// Add todo
 addTodo.addEventListener("click", () => {
   validateInput(enterItem.value);
 });
 
-items.addEventListener("click", (event) => {
+// Remove todo
+todos.addEventListener("click", (event) => {
   const checkItem = event.target.closest(".check-icon");
+  const removeItem = event.target.closest(".remove-icon");
 
   if (checkItem) {
-    checkItem.closest(".item").classList.toggle("completed");
+    checkItem.closest(".todo").classList.toggle("completed");
+  }
+
+  if (removeItem) {
+    removeItem.closest(".todo").remove();
   }
 });
+
+

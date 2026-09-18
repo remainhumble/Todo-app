@@ -134,13 +134,13 @@ body.dark-mode #add-todo {
 #add-todo:hover,
 body.dark-mode #add-todo:hover {
   --border-background: linear-gradient(
-    135deg,
+    140deg,
     hsl(192, 100%, 67%),
     hsl(280, 87%, 65%)
   );
 }
 
-.item-content {
+.content {
   width: 100%;
   display: flex;
   align-items: center;
@@ -157,17 +157,17 @@ input::placeholder {
   color: hsl(236, 9%, 61%);
 }
 
-#items {
+#todos {
   border-radius: 5px 5px 0 0;
   overflow: hidden;
   background-color: hsl(0, 0%, 100%);
 }
 
-body.dark-mode #items {
+body.dark-mode #todos {
   background-color: hsl(235, 24%, 19%);
 }
 
-.item {
+.todo {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -181,7 +181,7 @@ body.dark-mode #items {
     color 0.3s;
 }
 
-body.dark-mode .item {
+body.dark-mode .todo {
   background-color: hsl(235, 24%, 19%);
   color: hsl(233, 14%, 35%);
   border-bottom: 1px solid hsl(237, 14%, 26%);
@@ -221,19 +221,19 @@ body.dark-mode .item-text {
   display: none;
 }
 
-.item.completed .check-icon {
+.todo.completed .check-icon {
   background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 }
 
-.item.completed .check-icon::before {
+.todo.completed .check-icon::before {
   background: transparent;
 }
 
-.item.completed .check-icon img {
+.todo.completed .check-icon img {
   display: block;
 }
 
-.item.completed .item-text {
+.todo.completed .item-text {
   color: hsl(236, 9%, 61%);
   text-decoration: line-through;
 }
@@ -245,7 +245,7 @@ body.dark-mode .check-icon {
 .check-icon:hover,
 body.dark-mode .check-icon:hover {
   --border-background: linear-gradient(
-    180deg,
+    140deg,
     hsl(192, 100%, 67%),
     hsl(280, 87%, 65%)
   );
