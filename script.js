@@ -53,20 +53,9 @@ const validateInput = (input) => {
 
   // Capitalize first letter
   input = input.charAt(0).toUpperCase() + input.slice(1);
-  console.log(`<div class="todo">
-        <div class="content">
-          <div class="check-icon" tabindex="0">
-            <img src="./images/icon-check.svg" alt="check-todo" />
-          </div>
-          <span class="item-text">${input}</span>
-        </div>
-        <img tabindex="0"
-          class="remove-icon"
-          src="./images/icon-cross.svg"
-          alt="remove-todo"
-        />
-      </div>`);
-todos.innerHTML += `<div class="todo">
+
+  // Todo format
+  todos.innerHTML += `<div class="todo">
         <div class="content">
           <div class="check-icon" tabindex="0">
             <img src="./images/icon-check.svg" alt="check-todo" />
@@ -79,6 +68,8 @@ todos.innerHTML += `<div class="todo">
           alt="remove-todo"
         />
       </div>`;
+
+  updateItemsLeft();
 };
 
 // Add todo
@@ -93,11 +84,17 @@ todos.addEventListener("click", (event) => {
 
   if (checkItem) {
     checkItem.closest(".todo").classList.toggle("completed");
+    updateItemsLeft();
   }
 
   if (removeItem) {
     removeItem.closest(".todo").remove();
+    updateItemsLeft();
   }
 });
 
-
+// Count number of todos
+const updateItemsLeft = () => {
+  const activeItems = document.querySelectorAll(".todo").length;
+  itemsLeft.textContent = `${activeItems} item${activeItems === 1 ? "" : "s"} left`;
+};
