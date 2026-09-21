@@ -11,6 +11,7 @@ const itemsLeftContainerDesktop = document.getElementById(
 const todos = document.getElementById("todos");
 const filters = document.querySelector(".filters");
 const filtersDesktop = document.querySelector(".filters-desktop");
+const filterBtns = document.querySelectorAll(".filter-btn");
 const taskData = [];
 
 // Switch between light and dark.
@@ -95,10 +96,32 @@ todos.addEventListener("click", (event) => {
 
 // Count number of todos
 const updateItemsLeft = () => {
-  const activeItems = document.querySelectorAll(".todo").length;
+  const activeItems = document.querySelectorAll(".todo:not(.completed)").length;
   const itemsLeftText = `${activeItems} item${activeItems === 1 ? "" : "s"} left`;
 
   itemsLeft.forEach((counter) => {
     counter.textContent = itemsLeftText;
   });
 };
+
+filterBtns.forEach((button) => {
+  button.addEventListener("click", () => {
+    const filter = button.dataset.filter;
+
+    document.querySelectorAll(".todo").forEach((todo) => {
+      const isCompleted = todo.classList.contains("completed");
+
+      const shouldShow =
+        filter === "all" ||
+        (filter === "active" && !isCompleted) ||
+        (filter === "completed" && isCompleted);
+
+      todo.style.display = shouldShow ? "flex" : "none";
+    });
+
+    filterBtns.forEach((filterButton) => {
+      filterButton.classList.remove("active");
+    });
+    button.classList.add("active");
+  });
+});

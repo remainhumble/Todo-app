@@ -201,6 +201,14 @@ body.dark-mode .item-text {
   cursor: pointer;
 }
 
+.filter-btn.active {
+  color: hsl(220, 98%, 61%);
+}
+
+body.dark-mode .filter-btn.active {
+  color: hsl(220, 98%, 61%);
+}
+
 .check-icon {
   --border-background: hsl(233, 11%, 84%);
   position: relative;
@@ -397,5 +405,9 @@ body.dark-mode .filters-desktop button {
     transition:
       background-color 0.3s,
       color 0.3s;
+  }
+
+  .filters-desktop button {
+    font-weight: 700;
   }
 }
