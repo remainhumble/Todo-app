@@ -3,7 +3,7 @@ const body = document.body;
 const inputField = document.getElementById("input-field");
 const enterItem = document.getElementById("enter-item");
 const addTodo = document.getElementById("add-todo");
-const itemsLeft = document.getElementById("items-left");
+const itemsLeft = document.querySelectorAll(".items-left");
 const itemsLeftContainer = document.getElementById("items-left-container");
 const itemsLeftContainerDesktop = document.getElementById(
   "items-left-container-desktop",
@@ -96,5 +96,9 @@ todos.addEventListener("click", (event) => {
 // Count number of todos
 const updateItemsLeft = () => {
   const activeItems = document.querySelectorAll(".todo").length;
-  itemsLeft.textContent = `${activeItems} item${activeItems === 1 ? "" : "s"} left`;
+  const itemsLeftText = `${activeItems} item${activeItems === 1 ? "" : "s"} left`;
+
+  itemsLeft.forEach((counter) => {
+    counter.textContent = itemsLeftText;
+  });
 };
