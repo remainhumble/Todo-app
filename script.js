@@ -74,9 +74,19 @@ const validateInput = (input) => {
   updateItemsLeft();
 };
 
-// Add new todos to the list
+// Add new todos to the list by clicking.
 addTodo.addEventListener("click", () => {
   validateInput(enterItem.value);
+  enterItem.value = "";
+});
+
+// Add new todos to the list by pressing Enter.
+enterItem.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    // Action to perform when Enter is pressed
+    validateInput(enterItem.value);
+    enterItem.value = "";
+  }
 });
 
 todos.addEventListener("click", (event) => {
@@ -96,6 +106,24 @@ todos.addEventListener("click", (event) => {
   }
 });
 
+todos.addEventListener("keydown", (event) => {
+  const checkItem = event.target.closest(".check-icon");
+  const removeItem = event.target.closest(".remove-icon");
+  if (event.key === "Enter") {
+    // Mark todos as complete
+    if (checkItem) {
+      checkItem.closest(".todo").classList.toggle("completed");
+      updateItemsLeft();
+    }
+
+    // Delete todos from the list
+    if (removeItem) {
+      removeItem.closest(".todo").remove();
+      updateItemsLeft();
+    }
+  }
+});
+
 // Count number of todos
 const updateItemsLeft = () => {
   const activeItems = document.querySelectorAll(".todo:not(.completed)").length;
@@ -109,8 +137,6 @@ const updateItemsLeft = () => {
 // Clear all completed todos
 clearCompleted.forEach((button) => {
   button.addEventListener("click", () => {
-    console.log("clicked");
-
     document.querySelectorAll(".todo").forEach((todo) => {
       if (todo.classList.contains("completed")) {
         todo.remove();

@@ -50,6 +50,7 @@ button {
   background: none;
   border: none;
   cursor: pointer;
+  transition: color 0.3s;
 }
 
 button:hover {
@@ -326,7 +327,6 @@ body.dark-mode .filters-desktop button {
 .filters button {
   font-weight: 700;
   color: hsl(236, 9%, 61%);
-  transition: color 0.3s;
 }
 
 .drag-instruction {
