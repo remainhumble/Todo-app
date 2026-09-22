@@ -12,9 +12,10 @@ const todos = document.getElementById("todos");
 const filters = document.querySelector(".filters");
 const filtersDesktop = document.querySelector(".filters-desktop");
 const filterBtns = document.querySelectorAll(".filter-btn");
+const clearCompleted = document.querySelectorAll(".clear-completed");
 const taskData = [];
 
-// Switch between light and dark.
+// Toggle light and dark mode
 const enableDarkMode = () => {
   if (toggleMode.querySelector("img").src.includes("icon-moon.svg")) {
     toggleMode.querySelector("img").src = "./images/icon-sun.svg";
@@ -73,21 +74,22 @@ const validateInput = (input) => {
   updateItemsLeft();
 };
 
-// Add todo
+// Add new todos to the list
 addTodo.addEventListener("click", () => {
   validateInput(enterItem.value);
 });
 
-// Remove todo
 todos.addEventListener("click", (event) => {
   const checkItem = event.target.closest(".check-icon");
   const removeItem = event.target.closest(".remove-icon");
 
+  // Mark todos as complete
   if (checkItem) {
     checkItem.closest(".todo").classList.toggle("completed");
     updateItemsLeft();
   }
 
+  // Delete todos from the list
   if (removeItem) {
     removeItem.closest(".todo").remove();
     updateItemsLeft();
@@ -104,10 +106,25 @@ const updateItemsLeft = () => {
   });
 };
 
+// Clear all completed todos
+clearCompleted.forEach((button) => {
+  button.addEventListener("click", () => {
+    console.log("clicked");
+
+    document.querySelectorAll(".todo").forEach((todo) => {
+      if (todo.classList.contains("completed")) {
+        todo.remove();
+      }
+    });
+  });
+});
+
+// Filter by all/active/complete todos
 filterBtns.forEach((button) => {
   button.addEventListener("click", () => {
     const filter = button.dataset.filter;
 
+    // Mark todos as complete
     document.querySelectorAll(".todo").forEach((todo) => {
       const isCompleted = todo.classList.contains("completed");
 
