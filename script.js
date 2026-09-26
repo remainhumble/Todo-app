@@ -13,7 +13,7 @@ const filters = document.querySelector(".filters");
 const filtersDesktop = document.querySelector(".filters-desktop");
 const filterBtns = document.querySelectorAll(".filter-btn");
 const clearCompleted = document.querySelectorAll(".clear-completed");
-const taskData = [];
+
 
 // Toggle light and dark mode
 const enableDarkMode = () => {
@@ -57,7 +57,7 @@ const validateInput = (input) => {
   input = input.charAt(0).toUpperCase() + input.slice(1);
 
   // Todo format
-  todos.innerHTML += `<div class="todo">
+  todos.innerHTML += `<li class="todo">
         <div class="content">
           <div class="check-icon" tabindex="0">
             <img src="./images/icon-check.svg" alt="check-todo" />
@@ -69,7 +69,7 @@ const validateInput = (input) => {
           src="./images/icon-cross.svg"
           alt="remove-todo"
         />
-      </div>`;
+      </li>`;
 
   updateItemsLeft();
 };
