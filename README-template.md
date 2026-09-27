@@ -74,7 +74,7 @@ I want to continuously learn about CRUD apps in general, especially the user int
 ### Useful resources
 
 - [Implementing accessibility](https://www.frontendmentor.io/learning-paths/introduction-to-web-accessibility-mXu-9PHVsd/article/6647781a20fb35b1b61abb59/read) - This helped me implement the project for a wider audience.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [JavaScript Drag & Drop Sortable List Project](https://www.youtube.com/watch?v=wv7pvH1O5Ho&t=2142s) - This is an amazing video which helped me understand drag and drop functionality. I'd recommend it to anyone still learning this concept.
 
 ### AI Collaboration
 

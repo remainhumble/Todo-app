@@ -14,7 +14,6 @@ const filtersDesktop = document.querySelector(".filters-desktop");
 const filterBtns = document.querySelectorAll(".filter-btn");
 const clearCompleted = document.querySelectorAll(".clear-completed");
 
-
 // Toggle light and dark mode
 const enableDarkMode = () => {
   if (toggleMode.querySelector("img").src.includes("icon-moon.svg")) {
@@ -57,19 +56,40 @@ const validateInput = (input) => {
   input = input.charAt(0).toUpperCase() + input.slice(1);
 
   // Todo format
-  todos.innerHTML += `<li class="todo">
-        <div class="content">
-          <div class="check-icon" tabindex="0">
-            <img src="./images/icon-check.svg" alt="check-todo" />
-          </div>
-          <span class="item-text">${input}</span>
-        </div>
-        <img tabindex="0"
-          class="remove-icon"
-          src="./images/icon-cross.svg"
-          alt="remove-todo"
-        />
-      </li>`;
+  const todo = document.createElement("li");
+  todo.className = "todo";
+  todo.draggable = true;
+
+  const content = document.createElement("div");
+  content.className = "content";
+
+  const checkIcon = document.createElement("div");
+  checkIcon.className = "check-icon";
+  checkIcon.tabIndex = 0;
+
+  const checkImage = document.createElement("img");
+  checkImage.src = "./images/icon-check.svg";
+  checkImage.alt = "check-todo";
+
+  checkIcon.appendChild(checkImage);
+
+  const itemText = document.createElement("span");
+  itemText.className = "item-text";
+  itemText.textContent = input;
+
+  content.appendChild(checkIcon);
+  content.appendChild(itemText);
+
+  const removeIcon = document.createElement("img");
+  removeIcon.className = "remove-icon";
+  removeIcon.tabIndex = 0;
+  removeIcon.src = "./images/icon-cross.svg";
+  removeIcon.alt = "remove-todo";
+
+  todo.appendChild(content);
+  todo.appendChild(removeIcon);
+
+  todos.appendChild(todo);
 
   updateItemsLeft();
 };
@@ -167,4 +187,40 @@ filterBtns.forEach((button) => {
     });
     button.classList.add("active");
   });
+});
+
+// Drag and drop functionality
+let draggedTodo = null;
+
+todos.addEventListener("dragstart", (event) => {
+  draggedTodo = event.target.closest(".todo");
+
+  if (!draggedTodo) return;
+
+  draggedTodo.classList.add("dragging");
+});
+
+todos.addEventListener("dragend", () => {
+  if (draggedTodo) {
+    draggedTodo.classList.remove("dragging");
+  }
+
+  draggedTodo = null;
+});
+
+todos.addEventListener("dragover", (event) => {
+  event.preventDefault();
+
+  const targetTodo = event.target.closest(".todo");
+
+  if (!targetTodo || targetTodo === draggedTodo) return;
+
+  const rect = targetTodo.getBoundingClientRect();
+  const middle = rect.top + rect.height / 2;
+
+  if (event.clientY < middle) {
+    todos.insertBefore(draggedTodo, targetTodo);
+  } else {
+    todos.insertBefore(draggedTodo, targetTodo.nextSibling);
+  }
 });
