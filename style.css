@@ -22,6 +22,7 @@ body {
 }
 
 body.dark-mode {
+  background-image: url("./images/bg-mobile-dark.jpg");
   background-color: hsl(235, 21%, 11%);
   background-repeat: no-repeat;
   background-size: 100% 210px;
@@ -142,10 +143,40 @@ body.dark-mode #add-todo:hover {
 }
 
 .content {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.reorder-controls {
+  display: flex;
+  gap: 4px;
+  margin-inline: 8px;
+}
+
+.reorder-controls button {
+  min-width: 64px;
+  height: 32px;
+  padding-inline: 6px;
+  color: hsl(236, 9%, 61%);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.reorder-controls button:hover:not(:disabled) {
+  color: hsl(220, 98%, 61%);
+}
+
+.reorder-controls button:focus-visible {
+  outline: 2px solid hsl(220, 98%, 61%);
+  outline-offset: 1px;
+}
+
+.reorder-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 input {
@@ -277,13 +308,13 @@ body.dark-mode .check-icon:hover {
 
 #items-left-container.dark-mode {
   background-color: hsl(235, 24%, 19%);
-  color: hsl(233, 14%, 35%);
+  color: hsl(236, 9%, 61%);
   box-shadow: 0px 5px 5px -15px hsl(237, 14%, 26%);
 }
 
 #items-left-container.dark-mode button,
 #items-left-container-desktop.dark-mode button {
-  color: hsl(233, 14%, 35%);
+  color: hsl(236, 9%, 61%);
 }
 
 #items-left-container-desktop {
@@ -321,7 +352,7 @@ body.dark-mode .filters-desktop {
 
 body.dark-mode .filters button,
 body.dark-mode .filters-desktop button {
-  color: hsl(233, 14%, 35%);
+  color: hsl(236, 9%, 61%);
 }
 
 .filters button {
@@ -354,10 +385,17 @@ body.dark-mode .filters-desktop button {
     background-image: url("./images/bg-desktop-light.jpg");
     background-repeat: no-repeat;
     background-size: 100% 285px;
-    padding: 70px 350px;
+    padding: 70px 24px;
+  }
+
+  /* centred max-width */
+  body > * {
+    max-width: 540px;
+    margin-inline: auto;
   }
 
   body.dark-mode {
+    background-image: url("./images/bg-desktop-dark.jpg");
     background-repeat: no-repeat;
     background-size: 100% 285px;
   }

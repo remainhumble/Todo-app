@@ -25,7 +25,6 @@ const enableDarkMode = () => {
     itemsLeftContainerDesktop.classList.add("dark-mode");
     filters.classList.add("dark-mode");
     filtersDesktop.classList.add("dark-mode");
-    body.style.backgroundImage = "url('./images/bg-desktop-dark.jpg')";
   } else {
     toggleMode.querySelector("img").src = "./images/icon-moon.svg";
     body.classList.remove("dark-mode");
@@ -35,7 +34,6 @@ const enableDarkMode = () => {
     itemsLeftContainerDesktop.classList.remove("dark-mode");
     filters.classList.remove("dark-mode");
     filtersDesktop.classList.remove("dark-mode");
-    body.style.backgroundImage = "url('./images/bg-desktop-light.jpg')";
   }
 };
 
@@ -63,9 +61,12 @@ const validateInput = (input) => {
   const content = document.createElement("div");
   content.className = "content";
 
-  const checkIcon = document.createElement("div");
+  const checkIcon = document.createElement("button");
+  checkIcon.type = "button";
   checkIcon.className = "check-icon";
-  checkIcon.tabIndex = 0;
+  checkIcon.setAttribute("role", "checkbox");
+  checkIcon.setAttribute("aria-checked", "false");
+  checkIcon.setAttribute("aria-label", `Mark "${input}" complete`);
 
   const checkImage = document.createElement("img");
   checkImage.src = "./images/icon-check.svg";
@@ -80,11 +81,12 @@ const validateInput = (input) => {
   content.appendChild(checkIcon);
   content.appendChild(itemText);
 
-  const removeIcon = document.createElement("img");
+  const removeIcon = document.createElement("button");
+  removeIcon.type = "button";
   removeIcon.className = "remove-icon";
-  removeIcon.tabIndex = 0;
-  removeIcon.src = "./images/icon-cross.svg";
-  removeIcon.alt = "remove-todo";
+  removeIcon.setAttribute("aria-label", `Delete "${input}"`);
+  removeIcon.innerHTML =
+    '<img src="./images/icon-cross.svg" alt="remove-todo">';
 
   todo.appendChild(content);
   todo.appendChild(removeIcon);
@@ -115,7 +117,10 @@ todos.addEventListener("click", (event) => {
 
   // Mark todos as complete
   if (checkItem) {
-    checkItem.closest(".todo").classList.toggle("completed");
+    const isCompleted = checkItem
+      .closest(".todo")
+      .classList.toggle("completed");
+    checkItem.setAttribute("aria-checked", isCompleted);
     updateItemsLeft();
   }
 
@@ -123,24 +128,6 @@ todos.addEventListener("click", (event) => {
   if (removeItem) {
     removeItem.closest(".todo").remove();
     updateItemsLeft();
-  }
-});
-
-todos.addEventListener("keydown", (event) => {
-  const checkItem = event.target.closest(".check-icon");
-  const removeItem = event.target.closest(".remove-icon");
-  if (event.key === "Enter") {
-    // Mark todos as complete
-    if (checkItem) {
-      checkItem.closest(".todo").classList.toggle("completed");
-      updateItemsLeft();
-    }
-
-    // Delete todos from the list
-    if (removeItem) {
-      removeItem.closest(".todo").remove();
-      updateItemsLeft();
-    }
   }
 });
 
@@ -198,6 +185,8 @@ todos.addEventListener("dragstart", (event) => {
   if (!draggedTodo) return;
 
   draggedTodo.classList.add("dragging");
+  event.dataTransfer.setData("text/plain", "");
+  event.dataTransfer.effectAllowed = "move";
 });
 
 todos.addEventListener("dragend", () => {
@@ -209,6 +198,8 @@ todos.addEventListener("dragend", () => {
 });
 
 todos.addEventListener("dragover", (event) => {
+  if (!draggedTodo) return;
+
   event.preventDefault();
 
   const targetTodo = event.target.closest(".todo");
@@ -222,5 +213,15 @@ todos.addEventListener("dragover", (event) => {
     todos.insertBefore(draggedTodo, targetTodo);
   } else {
     todos.insertBefore(draggedTodo, targetTodo.nextSibling);
+  }
+});
+
+todos.addEventListener("keydown", (event) => {
+  const todo = event.target.closest(".todo");
+  if (!todo || !event.altKey) return;
+  if (event.key === "ArrowUp" && todo.previousElementSibling) {
+    todo.previousElementSibling.before(todo);
+  } else if (event.key === "ArrowDown" && todo.nextElementSibling) {
+    todo.nextElementSibling.after(todo);
   }
 });
